@@ -8,16 +8,20 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
+NOTE: branch `test` is for testing with newly created jekyll gem theme (ref [Creating a gem based theme](https://jekyllrb.com/docs/themes/#creating-a-gem-based-theme) & [kahani-demosite test branch](https://github.com/lalishansh/kahani-demosite/tree/test))
+
 Add this line to your Jekyll site's `Gemfile`:
 
 ```ruby
-gem "kahani"
+gem "jekyll-remote-theme"
 ```
 
 And add this line to your Jekyll site's `_config.yml`:
 
 ```yaml
-theme: kahani
+remote_theme: lalishansh/kahani
+plugins:
+  - jekyll-remote-theme
 ```
 
 And then execute:
@@ -26,9 +30,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install kahani
+    $ gem install jekyll-remote-theme
 
 ## Usage
+
+Test with:
+
+    $ bundle exec jekyll serve
 
 TODO: Write usage instructions here. Describe your available layouts, includes, sass and/or assets.
 
