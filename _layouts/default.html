@@ -1,3 +1,15 @@
-layout inherited from _layouts/default.html <br>
+---
+layout: base
+---
+
+<!-- Header -->
+<ul>
+    <li><a href="/">Home</a></li>
+    {% for collection in site.collections %}
+        <li><a href="/{{ collection.label | downcase }}/">{{ collection.label }}</a></li>
+    {% endfor %}
+</ul>
+
+<hr>
 
 {{ content }}

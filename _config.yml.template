@@ -1,0 +1,37 @@
+# Site settings
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+exclude: [ Gemfile, Gemfile.lock, kahani.gemspec, LICENSE, README.md ]
+include: [ src, src/_posts/index.html ] # somehow 'index.html' for 'posts' collection is not included by default
+
+collections_dir: src
+collections:
+  blogs:
+    output: true
+    permalink: /:collection/:year/:month/:day/:title
+  docs:
+    output: true
+    permalink: /:collection/:path
+  journals:
+    output: true
+    permalink: /:collection/:year/:month/:day/:title
+  posts:
+    output: true
+    permalink: /:collection/:year/:month/:day/:title
+  # ...
+
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled:     true
+  collections: true
+
+dir_to_yaml:
+  enabled: true
+  mappings:
+    - collection: docs # mandatory
+      yaml: _data/docs-dir.yaml # mandatory
+      include: ["*.md", "*.html"] # optional, default all
+      exclude: ["index.*", "nav.*"] # optional, default none

@@ -2,5 +2,11 @@
 .bundle
 .jekyll-cache
 .sass-cache
-_site
 Gemfile.lock
+
+_site
+
+# For local testing purposes
+/_data/*.yaml
+/src/
+_config.yml
