@@ -8,27 +8,49 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-NOTE: branch `test` is for testing with newly created jekyll gem theme (ref [Creating a gem based theme](https://jekyllrb.com/docs/themes/#creating-a-gem-based-theme) & [kahani-demosite test branch](https://github.com/lalishansh/kahani-demosite/tree/test))
+**NOTE(s)**: 
+- branch `test` is for testing with newly created jekyll gem theme (ref [Creating a gem based theme](https://jekyllrb.com/docs/themes/#creating-a-gem-based-theme) & [kahani-demosite test branch](https://github.com/lalishansh/kahani-demosite/tree/test))
+- Below instructions are for **super minimal** theme setup, see [Kahani Demosite](https://github.com/lalishansh/kahani-demosite) for more detailed setup.
 
-Add this line to your Jekyll site's `Gemfile`:
+Add these lines to file(s) in your Jekyll site's `ROOT`:
 
-```ruby
-gem "jekyll-remote-theme"
-```
+- `/Gemfile`:
+    ```ruby
+    gem "jekyll-remote-theme"
+    ```
 
-And add this line to your Jekyll site's `_config.yml`:
+- `/_config.yml`:
+    ```yaml
+    remote_theme: lalishansh/kahani
+    plugins:
+    - jekyll-remote-theme
+    ```
 
-```yaml
-remote_theme: lalishansh/kahani
-plugins:
-  - jekyll-remote-theme
-```
+- `ROOT/index.html`:    
+    ```html
+    ---
+    layout: home
+    ---
 
-And then execute:
+    My site's root page.
+    ```
+
+- optionally `/_layouts/home.html` (demonstration of layout override):
+    ```html
+    ---
+    layout: default
+    ---
+
+    layout inherited from _layouts/home.html inside consumer <br>
+
+    {{ content }}
+    ```
+
+And then execute (from your Jekyll site's root directory):
 
     $ bundle
 
-Or install it yourself as:
+Or install gem yourself as:
 
     $ gem install jekyll-remote-theme
 
@@ -36,7 +58,7 @@ Or install it yourself as:
 
 Test with:
 
-    $ bundle exec jekyll serve
+    $ bundle exec jekyll serve --livereload
 
 TODO: Write usage instructions here. Describe your available layouts, includes, sass and/or assets.
 

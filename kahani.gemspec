@@ -10,7 +10,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://lalishansh.github.io"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r!^(assets|_data|_layouts|_includes|_sass|LICENSE|README|_config\.yml)!i) }
+  # Added _plugins, 404.html, index.html, _config.yml to the list of files
+  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r!^(assets|_data|_layouts|_includes|_sass|_plugins|index\.html|404\.html|_config\.yml|README\.md|LICENSE)!i) }
 
   spec.add_runtime_dependency "jekyll", "~> 4.3"
   spec.add_runtime_dependency "jekyll-relative-links", "~> 0.7.0"

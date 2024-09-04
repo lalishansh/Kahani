@@ -28,10 +28,10 @@ relative_links:
   enabled:     true
   collections: true
 
-dir_to_yaml:
+directory_indexes:
   enabled: true
-  mappings:
-    - collection: docs # mandatory
-      yaml: _data/docs-dir.yaml # mandatory
-      include: ["*.md", "*.html"] # optional, default all
+  collections:
+    - name:    docs                 # mandatory
+      outfile: _data/docs-dir.yaml  # mandatory (yaml file), relative to _data
+      include: ["*.md", "*.html"]   # optional, default all
       exclude: ["index.*", "nav.*"] # optional, default none

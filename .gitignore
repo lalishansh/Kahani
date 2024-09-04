@@ -1,12 +1,6 @@
-*.gem
+_site
 .bundle
 .jekyll-cache
 .sass-cache
+*.gem
 Gemfile.lock
-
-_site
-
-# For local testing purposes
-/_data/*.yaml
-/src/
-_config.yml

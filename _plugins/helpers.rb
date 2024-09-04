@@ -1,9 +1,9 @@
 # # in _config.yml
-# dir_to_yaml:
+# directory_indexes:
 #   enabled: true
-#   mappings:
-#     - collection: posts # mandatory
-#       yaml: _data/posts-dir.yaml # mandatory
+#   collections:
+#     - name: posts # mandatory
+#       outfile: _data/posts-dir.yaml # mandatory
 #       include: # optional, default is [ "*" ]
 #         - "*.md"
 #         - "*.html"
@@ -47,7 +47,7 @@ module Reading
         safe true
         attr_accessor :site, :config
 
-        KEY_CONFIG = "dir_to_yaml"
+        KEY_CONFIG = "directory_indexes"
 
         def context
             @context ||= JekyllRelativeLinks::Context.new(site)
@@ -60,26 +60,33 @@ module Reading
 
             return if @config.nil? || !@config["enabled"]
 
-            @config["mappings"].each do |mapping|
-                generate_data_file(mapping)
+            @config["collections"].each do |mapping|
+                collection_name = mapping["name"]
+                yaml_file = mapping["outfile"]
+                include_filter = mapping["include"] || ["*"]
+                exclude_filter = mapping["exclude"] || []
+
+                if @site.collections.key?(collection_name)
+                    generate_data_file_for_collection(collection_name, yaml_file, include_filter, exclude_filter)
+                else
+                    Jekyll.logger.warn "Directory Indexes:", "Collection '#{collection_name}' not found in site."
+                end
             end
         end
 
-        def generate_data_file(mapping)
-            collection = mapping["collection"]
-            yaml = mapping["yaml"]
-
-            include_filter = mapping["include"] || ["*"]
-            exclude_filter = mapping["exclude"] || []
+        def generate_data_file_for_collection(collection, yaml_output_file, include_files, exclude_files)
 
             root = @site.collections[collection].directory
+            tree_obj = create_nav_tree(root, include_files, exclude_files)
 
-            tree_obj = create_nav_tree(root, include_filter, exclude_filter)
-
-            File.open(yaml, "w") do |f|
+            output_dir = File.dirname(yaml_output_file)
+            FileUtils.mkpath(output_dir) unless File.directory?(output_dir)
+            
+            File.open(yaml_output_file, "w") do |f|
                 f.write(tree_obj['children'].to_yaml)
             end
 
+            ## FOR DEBUGGING
             # obj = []
             # @potential_targets.each do |target|
             #     obj << {
@@ -97,26 +104,6 @@ module Reading
             root_path = this_path.parent.realpath
 
             create_nav_tree_impl(this_path, root_path, include_files, exclude_files)
-        end
-
-        def create_tree_entry(name, children, path, root)
-            entry = {}
-            
-            entry['name'] = name
-
-            if ! children.empty?
-                entry['children'] = children
-            end
-
-            if ! path.directory?
-                path_from_root = path.relative_path_from(root).to_s
-                target = @potential_targets.find { |p| p.relative_path.sub(%r!\A/!, "") == path_from_root }
-                entry['href'] = target.url
-            end
-
-
-
-            return entry
         end
 
         def create_nav_tree_impl(path, root, include_files = ['*'], exclude_files = [])
@@ -164,6 +151,24 @@ module Reading
             end
 
             return pass
+        end
+
+        def create_tree_entry(name, children, path, root)
+            entry = {}
+            
+            entry['name'] = name
+
+            if ! children.empty?
+                entry['children'] = children
+            end
+
+            if ! path.directory?
+                path_from_root = path.relative_path_from(root).to_s
+                target = @potential_targets.find { |p| p.relative_path.sub(%r!\A/!, "") == path_from_root }
+                entry['href'] = target.url
+            end
+
+            return entry
         end
     end
 end
