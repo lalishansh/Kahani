@@ -59,8 +59,8 @@ module Jekyll
                     obj = obj[part]
                 end
                 obj["url/"] = url
-                if !page.title.nil? then
-                    obj["title/"] = page.title
+                if !page.data["title"].nil? then
+                    obj["title/"] = page.data["title"]
                 end
                 
     
