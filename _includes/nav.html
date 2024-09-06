@@ -1,0 +1,25 @@
+{% assign navlist = include.navlist %}
+<ul>    
+{% for item in navlist %}
+    <!-- skip hashes that are properties -->
+    {% if item[0] == 'title/' or item[0] == 'url/' %}
+        {% continue %}
+    {% endif %}
+
+    {% assign item_title = item[1]['title/'] %}
+    {% assign item_url = item[1]['url/'] %}
+    {% if item_title == nil %}
+        {% assign item_title = item[0] %}
+    {% endif %}
+    {% if item_url != nil %}
+        <li><a href="{{ item_url }}">{{ item_title }}</a></li>
+    {% else %}
+        <li>{{ item_title }}</li>
+    {% endif %}
+
+    {% assign subobject = item[1] %}
+    {% if subobject != nil %}
+        {% include nav.html navlist=subobject %}
+    {% endif %}
+{% endfor %}
+</ul>

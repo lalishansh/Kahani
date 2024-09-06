@@ -1,5 +1,16 @@
 ---
 layout: default
 ---
+<!-- content stylyzation, navigation and table of contents -->
+<!-- NOTE: `create_navigation_list_cache_for_collection` depends on plugin `collection_navlist_cache_tag` may create problem in your theme -->
+{% create_navigation_list_cache_for_collection %}
 
-{{ content }}
+<div style="display: flex; justify-content: space-between;">
+    <div style="width: 20%; padding: 10px; min-width: 200px; border-right: 1px solid;">
+        <h3>Navigation:</h3>
+        {% assign navlist = site.data[page.collection].Kahani %}
+        {% include nav.html navlist=navlist %}
+    </div>
+    <div style="width: 60%; padding: 10px;">{{ content }}</div>
+    <div style="width: 20%; padding: 10px; min-width: 200px; border-left: 1px solid;">{% toc %}</div>
+</div>

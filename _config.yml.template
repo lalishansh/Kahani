@@ -15,23 +15,24 @@ collections:
     permalink: /:collection/:path
   journals:
     output: true
-    permalink: /:collection/:year/:month/:day/:title
+    permalink: /:collection/:year/:month/:day-:title
   posts:
     output: true
-    permalink: /:collection/:year/:month/:day/:title
+    permalink: /:collection/:year-:month-:day/:title
   # ...
+defaults:
+  - scope:
+      path: ""
+    values:
+      toc: true
 
 plugins:
   - jekyll-relative-links
+  - jekyll-toc
+# FOR using as remote_theme
+  - jekyll-remote-theme
+remote_theme: lalishansh/kahani
 
 relative_links:
   enabled:     true
   collections: true
-
-directory_indexes:
-  enabled: true
-  collections:
-    - name:    docs                 # mandatory
-      outfile: _data/docs-dir.yaml  # mandatory (yaml file), relative to _data
-      include: ["*.md", "*.html"]   # optional, default all
-      exclude: ["index.*", "nav.*"] # optional, default none
