@@ -1,0 +1,206 @@
+/* =========================================
+   0. Global Theming System
+   ========================================= */
+:root {
+    /* Layer system */
+    --layer-topmost: 4;
+    --layer-header: 3;
+    --layer-upper: 2;
+    --layer-up: 1;
+
+    /* Theme colors declaration */
+    /* # Primary */
+    --ThemeColor: none;
+    --Maximum: #1a1a1a;
+    --Strongest: #2d2d2d;
+    --Stronger: #404040;
+    --Strong: #595959;
+    --Bright: #737373;
+    --Medium: #8c8c8c;
+    --Soft: #a6a6a6;
+    --Softer: #bfbfbf;
+    --Softest: #d9d9d9;
+    --Minimum: #f2f2f2;
+    /* # Secondry */
+    --Red: brown;
+    --LightRed: lightcoral;
+    --Green: green;
+    --LightGreen: lightgreen;
+    --Blue: blue;
+    --LightBlue: lightblue;
+    --Yellow: orange;
+    --LightYellow: lightyellow;
+    --Gray: gray;
+    --LightGray: lightgray;
+}
+
+/* ## Theme Definitions */
+:root [data-theme="light"] {
+    /* DEFAULT */
+    --ThemeColor: white;
+}
+
+:root [data-theme="dark"] {
+    --ThemeColor: black;
+    --Maximum: #f2f2f2;
+    --Strongest: #d9d9d9;
+    --Stronger: #bfbfbf;
+    --Strong: #a6a6a6;
+    --Bright: #8c8c8c;
+    --Medium: #737373;
+    --Soft: #595959;
+    --Softer: #404040;
+    --Softest: #2d2d2d;
+    --Minimum: #1a1a1a;
+    /* # Secondry */
+    --Red: lightcoral;
+    --LightRed: brown;
+    --Green: lightgreen;
+    --LightGreen: green;
+    --Blue: lightblue;
+    --LightBlue: blue;
+    --Yellow: lightyellow;
+    --LightYellow: orange;
+    --Gray: lightgray;
+    --LightGray: gray;
+}
+
+:root [data-theme="blue"] {
+    --ThemeColor: blue;
+    --Maximum: #012a4a;
+    --Strongest: #013a63;
+    --Stronger: #01497c;
+    --Strong: #014f86;
+    --Bright: #2a6f97;
+    --Medium: #2c7da0;
+    --Soft: #468faf;
+    --Softer: #61a5c2;
+    --Softest: #89c2d9;
+    --Minimum: #a9d6e5;
+}
+
+:root [data-theme="red"] {
+    --ThemeColor: red;
+    --Maximum: #590d22;
+    --Strongest: #800f2f;
+    --Stronger: #a4133c;
+    --Strong: #c9184a;
+    --Bright: #ff4d6d;
+    --Medium: #ff758f;
+    --Soft: #ff8fa3;
+    --Softer: #ffb3c1;
+    --Softest: #ffccd5;
+    --Minimum: #fff0f3;
+}
+
+:root [data-theme="green"] {
+    --ThemeColor: green;
+    --Maximum: #1b4332;
+    --Strongest: #2d6a4f;
+    --Stronger: #40916c;
+    --Strong: #52b788;
+    --Bright: #74c69d;
+    --Medium: #95d5b2;
+    --Soft: #b7e4c7;
+    --Softer: #d8f3dc;
+    --Softest: #e8f5e9;
+    --Minimum: #f1faee;
+}
+
+:root [data-theme="purple"] {
+    --ThemeColor: purple;
+    --Maximum: #3c096c;
+    --Strongest: #5a189a;
+    --Stronger: #7209b7;
+    --Strong: #9d4edd;
+    --Bright: #b185db;
+    --Medium: #c8b6d9;
+    --Soft: #d4c2e0;
+    --Softer: #e0d1e8;
+    --Softest: #ede5f0;
+    --Minimum: #f5f0f8;
+}
+
+:root [data-theme="orange"] {
+    --ThemeColor: orange;
+    --Maximum: #7f2d00;
+    --Strongest: #a64200;
+    --Stronger: #cc5500;
+    --Strong: #e85d04;
+    --Bright: #f48c06;
+    --Medium: #faa307;
+    --Soft: #ffba08;
+    --Softer: #ffd166;
+    --Softest: #ffe8a3;
+    --Minimum: #fff5d6;
+}
+
+/* =========================================
+   2. DEFAULT LAYOUT
+   ========================================= */
+
+body {
+    background: var(--Minimum) url(/assets/black-thread-light.png) repeat left
+        top;
+    color: var(--Strongest);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6em;
+}
+
+/* =========================================
+   2. COMMON LAYOUT STYLES
+   ========================================= */
+
+.layout-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.side-panel {
+    min-width: 300px;
+    max-width: 350px;
+    order: -1;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    row-gap: 20px;
+    align-self: flex-start;
+    top: 55px; /*based on header height*/
+}
+
+.side-panel > div {
+    background: var(--Minimum);
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 1000px) {
+    .layout-wrapper {
+        flex-direction: column;
+    }
+
+    .side-panel {
+        order: 1;
+        position: static;
+        max-width: none;
+        width: 100%;
+    }
+
+    .mid-section {
+        min-width: 0;
+        order: 0;
+    }
+}

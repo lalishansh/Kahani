@@ -1,0 +1,23 @@
+{{ define "main" }}
+    <div style="height: 100px; align-content: end;">
+        <h1 style="border: 5px solid black;">TODO</h1>
+    </div>
+
+
+    <div class="layout-wrapper">
+        <div class="mid-section main-section">
+            {{ .Content }}
+        </div>
+
+        <div class="side-panel right">
+            <div>
+                <h3>Table of Contents</h3>
+                {{ .TableOfContents }}
+            </div>
+            <div>
+                <h3>Docs</h3>
+                {{ .TableOfContents }}
+            </div>
+        </div>
+    </div>
+{{ end }}

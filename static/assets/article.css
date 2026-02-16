@@ -1,0 +1,217 @@
+/* Headers
+============================== */
+.main-section h1,
+.main-section h2,
+.main-section h3,
+.main-section h4,
+.main-section h5,
+.main-section h6 {
+    color: var(--Maximum);
+    margin: 1em 0 0.5em;
+}
+
+.main-section h1 {
+    font-size: 2.5em;
+}
+.main-section h2 {
+    font-size: 2em;
+}
+.main-section h3 {
+    font-size: 1.6em;
+}
+.main-section h4 {
+    font-size: 1.3em;
+}
+.main-section h5 {
+    font-size: 1.1em;
+}
+.main-section h6 {
+    font-size: 1em;
+}
+
+/* Emphasis
+============================== */
+
+/* Lists
+============================== */
+.main-section ul,
+.main-section ol {
+    margin: 0 1em 1em;
+    padding-left: 1em;
+}
+
+.main-section li {
+    margin: 0.25em 0;
+    & > ul,
+    & > ol,
+    & > p {
+        margin: 0.5em 0;
+    }
+}
+
+/* Task Lists
+============================== */
+
+/* see https://github.com/gohugoio/hugo/issues/6837 */
+
+/* Definition Lists
+============================== */
+.main-section dl {
+    margin-bottom: 1em;
+}
+
+.main-section dt {
+    font-weight: 600;
+    margin-top: 1em;
+}
+
+.main-section dd {
+    margin-left: 0.5em;
+}
+
+/* Links
+============================== */
+
+.main-section a {
+    color: var(--Strong);
+    text-decoration: none;
+}
+
+.main-section a:hover {
+    color: var(--Medium);
+    text-decoration: underline;
+}
+
+/* Images
+============================== */
+.main-section img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+    border-radius: 6px;
+}
+
+.main-section a img {
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.main-section a:hover img {
+    border-color: var(--Medium);
+}
+
+/* Code
+============================== */
+
+.main-section pre {
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--Soft);
+    overflow: auto;
+}
+.main-section .highlight {
+    margin: 1em 0;
+}
+
+/* Tables
+============================== */
+
+.main-section table {
+    border-collapse: collapse;
+    border-style: hidden;
+    width: 100%;
+    margin: 1em 0;
+    overflow: auto;
+    & td,
+    th {
+        padding: 6px 13px;
+        border: 1px solid black;
+    }
+    & th {
+        border-bottom-width: 3px;
+    }
+}
+
+/* Blockquotes
+============================== */
+.main-section blockquote {
+    background: var(--Soft);
+    border-left: 5px var(--Strong) solid;
+    margin: 20px 0;
+    border-radius: 12px;
+    transition: 0.3s;
+    display: flow-root;
+    padding: 10px;
+
+    &.note {
+        border-color: var(--Blue);
+        background: var(--LightBlue);
+        & strong::before {
+            content: "=";
+        }
+    }
+    &.tip {
+        border-color: var(--Green);
+        background: var(--LightGreen);
+        & strong::before {
+            content: ">";
+        }
+    }
+    &.important {
+        border-color: var(--Yellow);
+        background: var(--LightYellow);
+        & strong::before {
+            content: "*";
+        }
+    }
+    &.warning {
+        border-color: var(--Gray);
+        background: var(--LightGray);
+        & strong::before {
+            content: "$";
+        }
+    }
+    &.caution {
+        border-color: var(--Red);
+        background: var(--LightRed);
+        & strong::before {
+            content: "!";
+        }
+    }
+}
+
+/* Horizontal rules
+============================== */
+.main-section hr {
+    height: 4px;
+    background-image: linear-gradient(
+        to right,
+        var(--Bright) 50%,
+        transparent 0%
+    );
+    background-size: 50px 4px;
+    background-repeat: repeat-x;
+    display: block;
+    border: none;
+    margin: 12px;
+}
+
+/* Footnotes
+============================== */
+
+/* Paragraphs and Line Breaks
+============================== */
+
+/* HTML Elements
+============================== */
+.main-section kbd {
+    border-top: 1px solid color-mix(in srgb, var(--Strongest) 25%, transparent);
+    border-left: 1px solid var(--Strongest);
+    border-right: 1px solid var(--Strongest);
+    border-bottom: 4px solid var(--Strongest);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin: 0 2px;
+}

@@ -1,0 +1,62 @@
+baseURL: "https://example.org/"
+languageCode: "en-US"
+title: "Hugo Site Test"
+
+publishdir: "!build"
+
+params:
+  math: true
+  author:
+    name: "Ishansh Lal"
+    contact: [
+      { name: "GitHub", url: "https://github.com/lalishansh" },
+      { name: "LinkedIn", url: "https://linkedin.com/in/lalishansh" },
+      { name: "E-mail", url: "mailto:lalishansh@gmail.com" },
+    ]
+  faviconDir: "/static/favicons/"
+
+markup:
+  defaultMarkdownHandler: goldmark
+  tableOfContents: { endLevel: 3, ordered: false, startLevel: 1 }
+  goldmark:
+    duplicateResourceFiles: false
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+      cjk:
+        enable: true
+        eastAsianLineBreaks: false
+        eastAsianLineBreaksStyle: simple
+        escapedSpace: false
+      passthrough:
+        enable: true
+        delimiters:
+          inline: [["\\(", "\\)"], ["$", "$"]]
+          block:  [["\\[", "\\]"], ["$$", "$$"]]
+
+    renderer:
+      unsafe: true
+      hardWraps: false
+      xhtml: false
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    lineNoStart: 1
+    lineNumbersInTable: true
+    style: monokai
+    tabWidth: 4
+    wrapperClass: highlight
+
+ignoreLogs: [ 'warning-home-page-is-leaf-bundle' ]
+enableGitInfo: true
+enableEmoji: true
+
+security:
+  enableInlineShortcodes: false
+  http: { methods: ['- (?i)GET|POST'], urls: ['.*'] }

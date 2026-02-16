@@ -1,0 +1,204 @@
+ <link rel="stylesheet" href="/assets/article.css">
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css"
+    integrity="sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi"
+    crossorigin="anonymous"
+>
+
+<style>
+    .title {
+        min-height: 100px;
+        color: var(--Minimum);
+        padding-top: 60px;
+        padding-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        flex-direction: column;
+    }
+
+    .title h1 {
+        color: var(--Maximum);
+        margin: 0;
+    }
+
+    .title p {
+        color: var(--Stronger);
+        margin: 5px 0 0 0;
+        text-align: center;
+    }
+
+    .side-panel {
+    min-width: 250px;
+
+    & > div {
+        border: 1px solid var(--Soft);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        & a {
+        color: var(--Bright);
+        text-decoration: none;
+        }
+        & ul,
+        & ol {
+        padding-left: 0.5em;
+        }
+        & li {
+        list-style: none;
+        margin: 0.25em 0;
+        & > ul,
+        & > ol,
+        & > p {
+            margin: 0.5em 0;
+        }
+        }
+    }
+    }
+
+    .main-section {
+    min-width: 400px;
+    max-width: 1500px;
+    background: var(--Minimum);
+    border: 1px solid var(--Softest);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    padding: 20px;
+    }
+
+    .header-anchor {
+        position: absolute;
+        color: var(--Soft);
+        text-decoration: none;
+        margin-left: 10px;
+        visibility: hidden;
+        transition: color 0.2s ease;
+    }{{.Content}}
+
+    h1:hover .header-anchor,
+    h2:hover .header-anchor,
+    h3:hover .header-anchor,
+    h4:hover .header-anchor,
+    h5:hover .header-anchor,
+    h6:hover .header-anchor {
+        visibility: visible;
+    }
+
+    .header-anchor:hover {
+        color: var(--Bright);
+    }
+
+    .back-to-top {
+        display: none;
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        z-index: var(--layer-up);
+        background-color: var(--Medium);
+        color: var(--Minimum);
+        border: 2px solid var(--Soft);
+        border-radius: 50%;
+        padding: 10px 12px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .back-to-top:hover {
+        background-color: var(--Bright);
+        transform: translateY(-3px);
+    }
+
+    .right {
+        order: 1;
+    }
+
+    .code-copy-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #444;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.875rem;
+        transition: background-color 0.2s;
+    }
+
+    .code-copy-btn:hover {
+        background-color: #555;
+    }
+
+    .code-copy-btn.copied {
+        background-color: #28a745;
+    }
+
+    @media (max-width: 1000px) {
+        .back-to-top {
+            display: initial;
+        }
+        .right {
+            order: -1;
+        }
+    }
+
+</style>
+
+<div class="title">
+    <h1>{{.Title}}</h1>
+    <p>{{.Summary}}</p>
+</div>
+
+<div class="layout-wrapper">
+    <div class="mid-section main-section">
+        {{ .Content }}
+    </div>
+
+    <div class="side-panel right">
+        <div>
+            <h3>Table of Contents</h3>
+            {{ .TableOfContents }}
+        </div>
+    </div>
+
+    <div class="side-panel">
+        <div>
+            <h4>Related</h4>
+            {{ .TableOfContents }}
+        </div>
+    </div>
+
+    <a class="back-to-top" href="#">↑</a>
+</div>
+
+<script>
+// Code copy buttons
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(block => {
+        // Skip the line number column (first td's code block)
+        if (block.parentElement.parentElement.style.width === '') return;
+
+        const btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.textContent = 'Copy';
+
+        btn.addEventListener('click', async () => {
+            // Use textContent and clean up multiple consecutive newlines
+            const text = block.textContent.trim();
+
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        });
+
+        block.parentElement.appendChild(btn);
+    });
+});
+</script>

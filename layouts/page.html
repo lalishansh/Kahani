@@ -1,0 +1,19 @@
+{{ define "main" }}
+    <div style="height: 100px; display: flex; align-items: end; justify-content: center;">
+        <h1 style="border-bottom: 5px solid black;">{{.Title}}</h1>
+    </div>
+
+
+    <div class="layout-wrapper">
+        <div class="mid-section main-section">
+            {{ .Content }}
+        </div>
+
+        <div class="side-panel right">
+            <div>
+                <h3>Table of Contents</h3>
+                {{ .TableOfContents }}
+            </div>
+        </div>
+    </div>
+{{ end }}

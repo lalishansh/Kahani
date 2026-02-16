@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/assets/global.css" />
+</head>
+<body data-theme="light">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    </style>
+    <header>
+        {{ block "header" . }}
+            <style>
+                header {
+                    z-index: 2;
+                    position: fixed;
+                    width: 100%;
+                    background-color: var(--Soft);
+                    padding: 1rem;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                }
+                .theme-btn {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                    background-color: var(--ThemeColor);
+                }
+                #theme-selector {
+                    display: none;
+                }
+                #theme-selector:hover,
+                .theme-btn:hover + #theme-selector {
+                    display: block;
+                    border: 2px solid var(--Stronger);
+                    padding: 5px;
+                    border-radius: 20px;
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    background-color: var(--LightGray);
+                }
+                main {
+                    min-height: 100vh;
+                    height: 100%;
+                }
+                footer {
+                    clear: both;
+                    position: relative;
+                    height: 20px;
+                    margin-top: -20px;
+                }
+
+            </style>
+
+            <a href="{{ .Site.BaseURL }}">🏠Home</a>
+            {{ range .Site.Sections }}
+                <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+            {{ range sort .Site.RegularPages "File.Path" }}
+                {{ if eq .FirstSection .Site.Home.FirstSection }}
+                    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                {{ end }}
+            {{ end }}
+            {{ range .Site.Params.Author.Contact }}
+                {{ if and (ne .Favicon nil) (ne .Favicon "") }}
+                    <a href="{{ .url }}"><img src="{{ .Favicon }}" alt="{{ .name }}" /></a>
+                {{ else if and (eq .Favicon nil) (fileExists (add "/static/favicons/" .name ".svg")) }}
+                    <a href="{{ .url }}"><img src="/favicons/{{.name}}.svg" alt="{{ .name }}" /></a>
+                {{ else }}
+                    <a href="{{ .url }}">{{ .name }} </a>
+                {{ end }}
+            {{ end }}
+            <div style="min-width: 20px; min-height: 20px;">
+                <div class="theme-btn"></div>
+                <div id="theme-selector">
+                    <button data-theme="light"  class="theme-btn"></button>
+                    <button data-theme="dark"   class="theme-btn"></button>
+                    <button data-theme="blue"   class="theme-btn"></button>
+                    <button data-theme="red"    class="theme-btn"></button>
+                    <button data-theme="green"  class="theme-btn"></button>
+                    <button data-theme="purple" class="theme-btn"></button>
+                    <button data-theme="orange" class="theme-btn"></button>
+                </div>
+                <script>
+                  document.querySelectorAll('.theme-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                      document.body.setAttribute('data-theme', button.dataset.theme);
+                    });
+                  });
+                </script>
+            </div>
+
+        {{ end }}
+    </header>
+    <main>
+        {{ block "main" . }}
+            {{ .Content }}
+        {{ end }}
+    </main>
+    <footer>
+        {{ block "footer" . }}
+            <hr>
+            <p style="text-align: center;">&copy; {{ now.Format "2006" }} {{ .Site.Params.Author.Name }}</p>
+        {{ end }}
+    </footer>
+</body>
