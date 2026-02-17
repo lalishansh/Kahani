@@ -1,6 +1,5 @@
 ---
-title: 🏡 Home 
-layout: home.html
+title: 🏡 Home
 ---
 
 # Welcome to My Website!

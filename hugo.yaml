@@ -5,7 +5,6 @@ title: "Hugo Site Test"
 publishdir: "!build"
 
 params:
-  math: true
   author:
     name: "Ishansh Lal"
     contact: [
@@ -38,7 +37,6 @@ markup:
         delimiters:
           inline: [["\\(", "\\)"], ["$", "$"]]
           block:  [["\\[", "\\]"], ["$$", "$$"]]
-
     renderer:
       unsafe: true
       hardWraps: false
@@ -53,7 +51,6 @@ markup:
     tabWidth: 4
     wrapperClass: highlight
 
-ignoreLogs: [ 'warning-home-page-is-leaf-bundle' ]
 enableGitInfo: true
 enableEmoji: true
 
